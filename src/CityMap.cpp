@@ -13,6 +13,14 @@ bool CityMap::loadMap(const std::string& fileName) {
     while (std::getline(file, line)) {
         std::vector<char> row(line.begin(), line.end());
         cityGrid.push_back(row);
+
+        for (size_t i = 0; i < row.size(); i++) {
+            if (row[i] == 'E') {
+                entryPoints.push_back({static_cast<int>(cityGrid.size() - 1), static_cast<int>(i)});
+            } else if (row[i] == 'P') {
+                binPoints.push_back({static_cast<int>(cityGrid.size() - 1), static_cast<int>(i)});
+            } 
+        }
     }
 
     file.close();
